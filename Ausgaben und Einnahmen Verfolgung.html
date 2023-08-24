@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ausgaben und Einnahmen Verfolgung</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1, h2, p {
+            margin: 10px;
+        }
+
+        form, p {
+            text-align: center;
+        }
+
+        input, button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ausgaben und Einnahmen Verfolgung</h1>
+
+    <h2>Ausgabe hinzufügen</h2>
+    <form id="ausgabeForm">
+        Betrag: <input type="number" step="0.01" id="ausgabeBetrag"><br>
+        Beschreibung: <input type="text" id="ausgabeBeschreibung"><br>
+        <button type="button" onclick="addAusgabe()">Hinzufügen</button>
+    </form>
+
+    <h2>Einnahme hinzufügen</h2>
+    <form id="einnahmeForm">
+        Betrag: <input type="number" step="0.01" id="einnahmeBetrag"><br>
+        Beschreibung: <input type="text" id="einnahmeBeschreibung"><br>
+        <button type="button" onclick="addEinnahme()">Hinzufügen</button>
+    </form>
+
+    <h2>Gesamtausgaben und Gesamteinnahmen</h2>
+    <p>Gesamtausgaben: <span id="gesamtAusgaben">0.00</span> €</p>
+    <p>Gesamteinnahmen: <span id="gesamtEinnahmen">0.00</span> €</p>
+
+    <script>
+        let gesamtAusgaben = 0;
+        let gesamtEinnahmen = 0;
+
+        function addAusgabe() {
+            const betrag = parseFloat(document.getElementById('ausgabeBetrag').value);
+            const beschreibung = document.getElementById('ausgabeBeschreibung').value;
+
+            if (!isNaN(betrag) && betrag > 0 && beschreibung !== '') {
+                gesamtAusgaben += betrag;
+                document.getElementById('gesamtAusgaben').textContent = gesamtAusgaben.toFixed(2);
+            }
+        }
+
+        function addEinnahme() {
+            const betrag = parseFloat(document.getElementById('einnahmeBetrag').value);
+            const beschreibung = document.getElementById('einnahmeBeschreibung').value;
+
+            if (!isNaN(betrag) && betrag > 0 && beschreibung !== '') {
+                gesamtEinnahmen += betrag;
+                document.getElementById('gesamtEinnahmen').textContent = gesamtEinnahmen.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
